@@ -18,6 +18,11 @@ describe("Table api test", function() {
         expect(table.rowNames[0]).to.equal('movie1');
         expect(table.rowNames[1]).to.equal('movie2');
     });
+    it('has correct value in the cells', function(){
+        expect(table.getCell('movie1', 'user1')).to.equal(5);
+        expect(table.getCell('movie2', 'user1')).to.equal(4.5);
+        expect(table.getCell('movie1', 'user2')).to.equal(3);
+    });
   });
 
 

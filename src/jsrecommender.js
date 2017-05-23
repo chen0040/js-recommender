@@ -41,6 +41,11 @@ var jsrecommender = jsrecommender || {};
         }
     };
     
+    Table.prototype.getCell = function(rowName, colName) {
+        var key = this.cellKey(rowName, colName);
+        return this.cells[key];
+    }
+    
     Table.prototype.containsCell = function(rowName, colName) {
         var key = this.cellKey(rowName, colName);
         return key in this.cells;
