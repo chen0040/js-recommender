@@ -1,6 +1,23 @@
 var jsrecommender = jsrecommender || {};
 
 (function (jss) {
+    
+    jss.copyArray = function(a) {
+        var b = [];
+        for (var i = 0; i < a.length; ++i) {
+            b.push(a[i]);
+        }
+        return b;
+    };
+    
+    jss.copyMap = function(a) { 
+        var b = {};
+        for (var key in a) {
+            b[key] = a[key];
+        }
+        return b;
+    };
+    
     var Table = function() {
         this.rowNames = [];
         this.columnNames = [];
@@ -71,6 +88,15 @@ var jsrecommender = jsrecommender || {};
             delete this.cells[this.cellKey(rowName, colName)];
         }
     };
+    
+    Table.prototype.makeCopy = function() {
+        var clone = new Table();
+        clone.rowNames = jss.copyArray(this.rowNames);
+        clone.columnNames = jss.copyArray(this.columnNames);
+        clone.cellCount = this.cellCount;
+        clone.cells = jss.copyMap(this.cells);
+        return clone;
+    }
     
     jss.Table = Table;
     
@@ -203,6 +229,18 @@ var jsrecommender = jsrecommender || {};
             sum += theta[colName][k] * X[rowName][k];
         }  
         return sum;
+    };
+    
+    Recommender.prototype.transform = function(table) {
+        var table = table.makeCopy();
+        for(var i = 0; i < table.rowNames.length; ++i) {
+            var rowName = table.rowNames[i];
+            for (var j = 0; j < table.colNames.length; ++j) {
+                var colName = table.colNames[j];
+                table.setCell(rowName, colName, predicted);
+            }
+        }
+        return table;
     };
     
 
