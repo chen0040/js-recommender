@@ -141,7 +141,7 @@ var jsrecommender = jsrecommender || {};
             for (var k = 0; k < this.kDim; ++k) {
                 t.push(Math.random());    
             }
-            this.X[this.rowNames[d]] = x;
+            this.X[this.rowNames[d]] = t;
         }  
         
         for (var iter = 0; iter < this.iterations; ++iter) {
@@ -149,9 +149,12 @@ var jsrecommender = jsrecommender || {};
             for (var d = 0; d < this.columnNames.length; ++d) {
                 var colName = this.columnNames[d];
                 for (var k = 0; k < this.kDim; ++k) {
+                    
                     this.theta[colName][k] = this.theta[colName][k] - this.alpha * Vtheta[colName][k];
+                    
                 }
             }
+            
             var Vx = this.gradX(table, this.theta, this.X);
             for (var d = 0; d < this.rowNames.length; ++d) {
                 var rowName = this.rowNames[d];
@@ -175,6 +178,7 @@ var jsrecommender = jsrecommender || {};
     };
     
     Recommender.prototype.gradTheta = function(table, theta, X) {
+        
         var Vtheta = {};
         for (var d = 0; d < this.columnNames.length; ++d) {
             var colName = this.columnNames[d];
@@ -191,12 +195,14 @@ var jsrecommender = jsrecommender || {};
                     }
                     
                     var y = table.cells[cellKey];
-                    
                     var predicted = this.h(theta, X, rowName, colName);
                     
-                    sum += (predicted - y) * X[rowName][k];
+                    var x_i_k = X[rowName][k];
+                    
+                    sum += (predicted - y) * x_i_k;
                 }
-                sum += this.lambda * theta[colName][d];
+                
+                sum += this.lambda * theta[colName][k];
                 
                 v.push(sum);
             }
@@ -223,11 +229,14 @@ var jsrecommender = jsrecommender || {};
                     
                     var y = table.cells[cellKey];
                     
+                    
                     var predicted = this.h(theta, X, rowName, colName);
+                    
                     
                     sum += (predicted - y) * theta[colName][k];
                 }
-                sum += this.lambda * X[rowName][d];
+                
+                sum += this.lambda * X[rowName][k];
                 
                 v.push(sum);
             }

@@ -6,27 +6,46 @@ describe("Recommender test", function() {
     var recommender = new jsrecommender.Recommender();
       
     var table = new jsrecommender.Table();
-    table.setCell('movie1', 'user1', 5);
-    table.setCell('movie2', 'user1', 4.5);
-    table.setCell('movie1', 'user2', 3.0);
+    
+      // table.setCell('[movie-name]', '[user]', [score]);
+    table.setCell('Love at last', 'Alice', 5);
+    table.setCell('Remance forever', 'Alice', 5);
+    table.setCell('Nonstop car chases', 'Alice', 0);
+    table.setCell('Sword vs. karate', 'Alice', 0);
+    table.setCell('Love at last', 'Bob', 5);
+    table.setCell('Cute puppies of love', 'Bob', 4);
+    table.setCell('Nonstop car chases', 'Bob', 0);
+    table.setCell('Sword vs. karate', 'Bob', 0);
+    table.setCell('Love at last', 'Carol', 0);
+    table.setCell('Cute puppies of love', 'Carol', 0);
+    table.setCell('Nonstop car chases', 'Carol', 5);
+    table.setCell('Sword vs. karate', 'Carol', 5);
+    table.setCell('Love at last', 'Dave', 0);
+    table.setCell('Remance forever', 'Dave', 0);
+    table.setCell('Nonstop car chases', 'Dave', 4);
       
-    recommender.fit(table);
+    var model = recommender.fit(table);
+    console.log(model);
+      
     resultant_table = recommender.transform(table);
       
-    it("has two columns", function() {
-    	expect(table.columnNames.length).to.equal(2);
-        expect(table.columnNames[0]).to.equal('user1');
-        expect(table.columnNames[1]).to.equal('user2');
+    console.log(resultant_table);
+      
+    it("has 4 users", function() {
+    	expect(table.columnNames.length).to.equal(4);
     });
-    it("has two rows", function() {
-    	expect(table.rowNames.length).to.equal(2);
-        expect(table.rowNames[0]).to.equal('movie1');
-        expect(table.rowNames[1]).to.equal('movie2');
+    it("has 5 movies", function() {
+    	expect(table.rowNames.length).to.equal(5);
     });
-    it('has correct value in the cells', function(){
-        expect(table.getCell('movie1', 'user1')).to.equal(5);
-        expect(table.getCell('movie2', 'user1')).to.equal(4.5);
-        expect(table.getCell('movie1', 'user2')).to.equal(3);
+    it('Predict correct value in the missing cells', function(){
+        for (var i = 0; i < resultant_table.columnNames.length; ++i) {
+            var user = resultant_table.columnNames[i];
+            console.log('For user: ' + user);
+            for (var j = 0; j < resultant_table.rowNames.length; ++j) {
+                var movie = resultant_table.rowNames[j];
+                console.log('Movie [' + movie + '] is rated ' + resultant_table.getCell(movie, user));
+            }
+        }
     });
   });
 
