@@ -16,7 +16,7 @@ The sample code below tries to predict the missing rating of [user, movie] as sh
 ![movie-recommender](images/movie-recommender.png)
 
 ```javascript
-var jsrecommender = require("jsrecommender");
+var jsrecommender = require("js-recommender");
 
 var recommender = new jsrecommender.Recommender();
       
