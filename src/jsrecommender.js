@@ -237,11 +237,14 @@ var jsrecommender = jsrecommender || {};
             var rowName = table.rowNames[i];
             for (var j = 0; j < table.colNames.length; ++j) {
                 var colName = table.colNames[j];
+                var predicted = this.h(this.theta, this.X, rowName, colName);
                 table.setCell(rowName, colName, predicted);
             }
         }
         return table;
     };
+    
+    
     
 
     jss.Recommender = Recommender;
