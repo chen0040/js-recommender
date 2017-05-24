@@ -35,7 +35,7 @@ var jsrecommender = jsrecommender || {};
         var names = cellKey.split('-');
         return {
             rowName: names[0],
-            colName: names[1];
+            colName: names[1]
         };
     }
     
@@ -124,23 +124,24 @@ var jsrecommender = jsrecommender || {};
     Recommender.prototype.fit = function(table) {
         this.theta = {};
         this.X = {};
-        this.columnNames = table.columnNames.length;
-        this.rowNames = table.rowNames.length;
+        this.columnNames = table.columnNames;
+        this.rowNames = table.rowNames;
         
         for (var d = 0; d < this.columnNames.length; ++d) {
             var x = [];
             for (var k = 0; k < this.kDim; ++k) {
                 x.push(Math.random());    
             }
-            this.X[this.columnNames[d]] = x;
+            this.theta[this.columnNames[d]] = x;
         }  
+        
         
         for (var d = 0; d < this.rowNames.length; ++d) {
             var t = [];
             for (var k = 0; k < this.kDim; ++k) {
                 t.push(Math.random());    
             }
-            this.theta[this.rowNames[d]] = x;
+            this.X[this.rowNames[d]] = x;
         }  
         
         for (var iter = 0; iter < this.iterations; ++iter) {
@@ -193,7 +194,7 @@ var jsrecommender = jsrecommender || {};
                     
                     var predicted = this.h(theta, X, rowName, colName);
                     
-                    sum += (predicted - y) * x[rowName][k];
+                    sum += (predicted - y) * X[rowName][k];
                 }
                 sum += this.lambda * theta[colName][d];
                 
@@ -224,7 +225,7 @@ var jsrecommender = jsrecommender || {};
                     
                     var predicted = this.h(theta, X, rowName, colName);
                     
-                    sum += (predicted - y) * x[colName][k];
+                    sum += (predicted - y) * theta[colName][k];
                 }
                 sum += this.lambda * X[rowName][d];
                 
@@ -247,8 +248,8 @@ var jsrecommender = jsrecommender || {};
         var table = table.makeCopy();
         for(var i = 0; i < table.rowNames.length; ++i) {
             var rowName = table.rowNames[i];
-            for (var j = 0; j < table.colNames.length; ++j) {
-                var colName = table.colNames[j];
+            for (var j = 0; j < table.columnNames.length; ++j) {
+                var colName = table.columnNames[j];
                 var predicted = this.h(this.theta, this.X, rowName, colName);
                 table.setCell(rowName, colName, predicted);
             }
