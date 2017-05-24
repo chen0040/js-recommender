@@ -1,6 +1,6 @@
 {
   "name": "js-recommender",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Package implements recommender system based on content collaborative filtering algorithm",
   "author": "Xianshun Chen",
   "contributors": [
@@ -24,18 +24,14 @@
     "url": "git+https://github.com/chen0040/js-recommender.git"
   },
   "keywords": [
-    "statistical distributions", 
-    "normal distribution", 
-    "t distribution", 
-    "f distribution", 
-    "Chi-squared distribution", 
-    "probability", 
-    "probability distributions", 
-    "random numbers", 
-    "random variates", 
-    "statistics",
-    "recommender",
-    "distribution-functions"
+    "recommender", 
+    "content collaborative filtering", 
+    "movie rating", 
+    "gradient descient", 
+    "recommender system", 
+    "content based recommendation",
+    "machine learning",
+    "unsupervised learning"
   ],
   "dependencies": {
     
