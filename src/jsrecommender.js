@@ -159,6 +159,18 @@ var jsrecommender = jsrecommender || {};
                 }
             }
         }
+        
+        return {
+            theta: this.theta,
+            X: this.X,
+            rowNames: this.rowNames,
+            columnNames: this.columnNames,
+            config: {
+                alpha: this.alpha,
+                lambda: this.lambda,
+                iterations: this.iterations 
+            }
+        }
     };
     
     Recommender.prototype.gradTheta = function(table, theta, X) {
@@ -244,7 +256,10 @@ var jsrecommender = jsrecommender || {};
         return table;
     };
     
-    
+    Recommender.prototype.fitAndTransform = function(table){
+        this.fit(table);
+        return this.transform(table);
+    };
     
 
     jss.Recommender = Recommender;
