@@ -27,9 +27,9 @@ describe("Recommender test", function() {
     var model = recommender.fit(table);
     console.log(model);
       
-    resultant_table = recommender.transform(table);
+    predicted_table = recommender.transform(table);
       
-    console.log(resultant_table);
+    console.log(predicted_table);
       
     it("has 4 users", function() {
     	expect(table.columnNames.length).to.equal(4);
@@ -37,13 +37,15 @@ describe("Recommender test", function() {
     it("has 5 movies", function() {
     	expect(table.rowNames.length).to.equal(5);
     });
+      
     it('Predict correct value in the missing cells', function(){
-        for (var i = 0; i < resultant_table.columnNames.length; ++i) {
-            var user = resultant_table.columnNames[i];
+        for (var i = 0; i < predicted_table.columnNames.length; ++i) {
+            var user = predicted_table.columnNames[i];
             console.log('For user: ' + user);
-            for (var j = 0; j < resultant_table.rowNames.length; ++j) {
-                var movie = resultant_table.rowNames[j];
-                console.log('Movie [' + movie + '] is rated ' + resultant_table.getCell(movie, user));
+            for (var j = 0; j < predicted_table.rowNames.length; ++j) {
+                var movie = predicted_table.rowNames[j];
+                console.log('Movie [' + movie + '] has actual rating of ' + Math.round(table.getCell(movie, user)));
+                console.log('Movie [' + movie + '] is predicted to have rating ' + Math.round(predicted_table.getCell(movie, user)));
             }
         }
     });
