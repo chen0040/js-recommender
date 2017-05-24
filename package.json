@@ -1,7 +1,7 @@
 {
   "name": "js-recommender",
-  "version": "1.0.5",
-  "description": "Package implements various statistics and distribution function",
+  "version": "1.0.1",
+  "description": "Package implements recommender system based on content collaborative filtering algorithm",
   "author": "Xianshun Chen",
   "contributors": [
     "Xianshun Chen <xs0040@gmail.com>"

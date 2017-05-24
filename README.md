@@ -57,3 +57,14 @@ for (var i = 0; i < predicted_table.columnNames.length; ++i) {
     }
 }
 ```
+
+To configure the recommender, can overwrite its parameters in its constructor:
+
+```javascript
+var recommender = new jsrecommender.Recommender({
+    alpha: 0.01, // learning rate
+    lambda: 0.0, // regularization parameter
+    iterations: 500, // maximum number of iterations in the gradient descent algorithm
+    kDim: 2 // number of hidden features for each movie
+});
+```
