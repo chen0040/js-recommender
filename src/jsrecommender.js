@@ -276,6 +276,7 @@ var jsrecommender = jsrecommender || {};
 
 })(jsrecommender);
 
+var module = module || {};
 if(module) {
 	module.exports = jsrecommender;
 }
