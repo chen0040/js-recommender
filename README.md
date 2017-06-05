@@ -11,6 +11,8 @@ npm install js-recommender
 
 # Usage 
 
+The the direct use of the javascript in html can be found in [example.html](https://rawgit.com/chen0040/js-recommender/master/example.html).
+
 The sample code below tries to predict the missing rating of [user, movie] as shown in the table below:
 
 ![movie-recommender](images/movie-recommender.png)
