@@ -1,0 +1,174 @@
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" type="text/javascript"></script>
+        
+        <script src="https://rawgit.com/chen0040/js-recommender/master/build/jsrecommender.min.js" type="application/javascript"></script>
+    </head>
+    <body>
+        <div class="container" ng-app="demo" ng-controller="demoController">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+
+                      <div class="panel-heading">Before Recommender</div>
+                      <div class="panel-body">
+                        <table class="table table-hover table-stripped">
+                            <thead>
+                                <tr>
+                                    <th>User / Movie</th>
+                                    <th>Alice</th>
+                                    <th>Bob</th>
+                                    <th>Carol</th>
+                                    <th>Dave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Love at last</td>
+                                    <td>{{table.getCell('Love at last', 'Alice')| number:0}}</td>
+                                    <td>{{table.getCell('Love at last', 'Bob')| number:0}}</td>
+                                    <td>{{table.getCell('Love at last', 'Carol')| number:0}}</td>
+                                    <td>{{table.getCell('Love at last', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Remance forever</td>
+                                    <td>{{table.getCell('Remance forever', 'Alice')| number:0}}</td>
+                                    <td>{{table.getCell('Remance forever', 'Bob')| number:0}}</td>
+                                    <td>{{table.getCell('Remance forever', 'Carol')| number:0}}</td>
+                                    <td>{{table.getCell('Remance forever', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cute puppies of love</td>
+                                    <td>{{table.getCell('Cute puppies of love', 'Alice')| number:0}}</td>
+                                    <td>{{table.getCell('Cute puppies of love', 'Bob')| number:0}}</td>
+                                    <td>{{table.getCell('Cute puppies of love', 'Carol')| number:0}}</td>
+                                    <td>{{table.getCell('Cute puppies of love', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nonstop car chases</td>
+                                    <td>{{table.getCell('Nonstop car chases', 'Alice')| number:0}}</td>
+                                    <td>{{table.getCell('Nonstop car chases', 'Bob')| number:0}}</td>
+                                    <td>{{table.getCell('Nonstop car chases', 'Carol')| number:0}}</td>
+                                    <td>{{table.getCell('Nonstop car chases', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sword vs. karate</td>
+                                    <td>{{table.getCell('Sword vs. karate', 'Alice')| number:0}}</td>
+                                    <td>{{table.getCell('Sword vs. karate', 'Bob')| number:0}}</td>
+                                    <td>{{table.getCell('Sword vs. karate', 'Carol')| number:0}}</td>
+                                    <td>{{table.getCell('Sword vs. karate', 'Dave')| number:0}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+                
+                </div>
+                
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+
+                      <div class="panel-heading">After Recommender</div>
+                      <div class="panel-body">
+                        <table class="table table-hover table-stripped">
+                            <thead>
+                                <tr>
+                                    <th>User / Movie</th>
+                                    <th>Alice</th>
+                                    <th>Bob</th>
+                                    <th>Carol</th>
+                                    <th>Dave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Love at last</td>
+                                    <td>{{predicted_table.getCell('Love at last', 'Alice')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Love at last', 'Bob')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Love at last', 'Carol')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Love at last', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Remance forever</td>
+                                    <td>{{predicted_table.getCell('Remance forever', 'Alice')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Remance forever', 'Bob')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Remance forever', 'Carol')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Remance forever', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cute puppies of love</td>
+                                    <td>{{predicted_table.getCell('Cute puppies of love', 'Alice')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Cute puppies of love', 'Bob')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Cute puppies of love', 'Carol')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Cute puppies of love', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nonstop car chases</td>
+                                    <td>{{predicted_table.getCell('Nonstop car chases', 'Alice')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Nonstop car chases', 'Bob')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Nonstop car chases', 'Carol')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Nonstop car chases', 'Dave')| number:0}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sword vs. karate</td>
+                                    <td>{{predicted_table.getCell('Sword vs. karate', 'Alice')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Sword vs. karate', 'Bob')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Sword vs. karate', 'Carol')| number:0}}</td>
+                                    <td>{{predicted_table.getCell('Sword vs. karate', 'Dave')| number:0}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+                
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var app = angular.module('demo', []);
+            var controller = function($scope){
+                var recommender = new jsrecommender.Recommender();
+
+                var table = new jsrecommender.Table();
+
+                  // table.setCell('[movie-name]', '[user]', [score]);
+                table.setCell('Love at last', 'Alice', 5);
+                table.setCell('Remance forever', 'Alice', 5);
+                table.setCell('Nonstop car chases', 'Alice', 0);
+                table.setCell('Sword vs. karate', 'Alice', 0);
+                table.setCell('Love at last', 'Bob', 5);
+                table.setCell('Cute puppies of love', 'Bob', 4);
+                table.setCell('Nonstop car chases', 'Bob', 0);
+                table.setCell('Sword vs. karate', 'Bob', 0);
+                table.setCell('Love at last', 'Carol', 0);
+                table.setCell('Cute puppies of love', 'Carol', 0);
+                table.setCell('Nonstop car chases', 'Carol', 5);
+                table.setCell('Sword vs. karate', 'Carol', 5);
+                table.setCell('Love at last', 'Dave', 0);
+                table.setCell('Remance forever', 'Dave', 0);
+                table.setCell('Nonstop car chases', 'Dave', 4);
+
+                var model = recommender.fit(table);
+                console.log(model);
+
+                predicted_table = recommender.transform(table);
+
+                console.log(predicted_table);
+                
+                $scope.table = table;
+                $scope.predicted_table = predicted_table;
+
+            };
+            app.controller('demoController', ['$scope', controller]);
+        </script>
+    </body>
+</html>
